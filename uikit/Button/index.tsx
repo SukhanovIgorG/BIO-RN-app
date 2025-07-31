@@ -1,3 +1,4 @@
+import { Colors, Gaps, Paddings, Radius } from "@/constants/tokens";
 import { ReactNode } from "react";
 import {
   StyleSheet,
@@ -10,7 +11,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   icon?: ReactNode;
   title?: string;
   typographyProps?: Partial<TypographyProps>;
-  type?: "primary" | "secondary";
+  type?: "primary" | "secondary" | "link";
 }
 
 export const Button = ({
@@ -18,21 +19,29 @@ export const Button = ({
   onPress,
   style,
   title,
-  type,
+  type = "link",
   disabled,
   typographyProps,
   ...restProps
 }: ButtonProps) => {
   const variants = {
     primary: {
-      paddingVertical: 11.5,
-      backgroundColor: "#000",
-      color: "#fff",
+      paddingVertical: 16,
+      backgroundColor: Colors.text,
+      color: Colors.background,
+      borderWidth: 0,
     },
     secondary: {
-      paddingVertical: 17.5,
-      backgroundColor: "#fff",
-      color: "#000",
+      paddingVertical: 12,
+      backgroundColor: Colors.background,
+      color: Colors.text,
+      borderWidth: 1,
+    },
+    link: {
+      paddingVertical: 8,
+      backgroundColor: "transparent",
+      color: Colors.text,
+      borderWidth: 0,
     },
   };
 
@@ -45,7 +54,11 @@ export const Button = ({
     >
       {icon}
       {title && (
-        <Typography {...typographyProps} numberOfLines={2}>
+        <Typography
+          style={{ color: variants[type].color || Colors.text }}
+          {...typographyProps}
+          numberOfLines={2}
+        >
           {title}
         </Typography>
       )}
@@ -55,10 +68,13 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 12,
+    borderRadius: Radius.r8,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 10,
+    gap: Gaps.g16,
+    borderColor: Colors.text,
+    borderWidth: 1,
+    paddingHorizontal: Paddings.p16,
   },
 });

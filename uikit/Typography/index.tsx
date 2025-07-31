@@ -2,8 +2,13 @@ import { Text, type TextProps } from "react-native";
 
 export type TypographyProps = TextProps & {
   children?: React.ReactNode;
+  color?: string;
 };
 
-export const Typography = ({ children, ...rest }: TypographyProps) => {
-  return <Text {...rest}>{children}</Text>;
+export const Typography = ({ children, color, ...rest }: TypographyProps) => {
+  return (
+    <Text style={{ color: color }} {...rest}>
+      {children}
+    </Text>
+  );
 };

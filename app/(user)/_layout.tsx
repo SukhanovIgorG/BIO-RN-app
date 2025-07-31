@@ -4,17 +4,12 @@ import { Platform } from "react-native";
 
 import { House, UsersRound } from "lucide-react-native";
 
-import { LogoutButton } from "@/components/Buttons/LogotButton";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { LogoutButton } from "@/components/Buttons/LogoutButton";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerRight: () => <LogoutButton style={{ marginRight: 10 }} />,
         tabBarStyle: Platform.select({
           ios: {
