@@ -1,10 +1,10 @@
 import { DefaultLayout } from "@/layouts";
-import { Text } from "react-native";
+import { Typography } from "@/uikit";
 
 export default function RegistrationScreen() {
   return (
     <DefaultLayout>
-      <Text>Registration Screen</Text>
+      <Typography>Registration Screen</Typography>
     </DefaultLayout>
   );
 }

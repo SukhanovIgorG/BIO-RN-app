@@ -1,10 +1,10 @@
 import { DefaultLayout } from "@/layouts";
-import { Text } from "react-native";
+import { Typography } from "@/uikit";
 
 export default function loginScreen() {
   return (
     <DefaultLayout>
-      <Text>Login Screen</Text>
+      <Typography>Login Screen</Typography>
     </DefaultLayout>
   );
 }

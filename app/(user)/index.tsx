@@ -1,10 +1,10 @@
 import { DefaultLayout } from "@/layouts";
-import { Text } from "react-native";
+import { Typography } from "@/uikit";
 
 export default function HomeScreen() {
   return (
     <DefaultLayout>
-      <Text>Home Screen</Text>
+      <Typography>Home Screen</Typography>
     </DefaultLayout>
   );
 }
