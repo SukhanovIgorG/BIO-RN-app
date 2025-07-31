@@ -9,15 +9,16 @@ export default function loginScreen() {
   return (
     <DefaultLayout>
       <View style={styles.page}>
-        <Typography>Вход</Typography>
+        <Typography variant="title">Вход</Typography>
         <View style={styles.card}>
           <Input />
           <Input isPassword />
+          <Button title="Войти" type="primary" />
           <Button
             title="Нет аккаунта"
+            type={"link"}
             onPress={() => router.replace("/(guest)/registration")}
           />
-          <Button title="Войти" type="primary" />
         </View>
       </View>
     </DefaultLayout>

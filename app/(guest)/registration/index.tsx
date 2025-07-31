@@ -9,13 +9,15 @@ export default function RegistrationScreen() {
   return (
     <DefaultLayout>
       <View style={styles.page}>
-        <Typography>Регистрация</Typography>
+        <Typography variant="title">Регистрация</Typography>
         <View style={styles.card}>
           <Input />
           <Input isPassword />
           <Input isPassword />
+          <Button title="Зарегистрироваться" type="primary" />
           <Button
             title="Уже есть аккаунт"
+            type={"link"}
             onPress={() => router.replace("/(guest)/login")}
           />
         </View>
