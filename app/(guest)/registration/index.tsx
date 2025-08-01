@@ -1,3 +1,4 @@
+import { Routes } from "@/constants/routes";
 import { Colors, Gaps, Paddings, Radius } from "@/constants/tokens";
 import { useRegistration } from "@/hooks/useRegistration";
 import { DefaultLayout } from "@/layouts";
@@ -10,12 +11,13 @@ import { StyleSheet, View } from "react-native";
 export default function RegistrationScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const { mutate: register } = useRegistration();
 
   const handleSubmit = () => {
-    register({ email, password });
+    register({ username, email, password });
   };
 
   return (
@@ -23,6 +25,12 @@ export default function RegistrationScreen() {
       <View style={styles.page}>
         <Typography variant="title">Регистрация</Typography>
         <View style={styles.card}>
+          <Input
+            label="Имя"
+            value={username}
+            onChangeText={setUsername}
+            placeholder="Имя"
+          />
           <Input
             label="Email"
             value={email}
@@ -51,7 +59,7 @@ export default function RegistrationScreen() {
           <Button
             title="Уже есть аккаунт"
             type={"link"}
-            onPress={() => router.replace("/(guest)/login")}
+            onPress={() => router.replace(Routes.Login)}
           />
         </View>
       </View>

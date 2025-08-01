@@ -1,16 +1,17 @@
+import { LoginUserDto, RegisterUserDto } from "@/types";
 import { instance } from "./api.service";
 import { removeAccessToken, setAccessToken } from "./token.service";
 
-export const login = async (email: string, password: string) => {
-  const res = await instance.post("/auth/login", { email, password });
+export const login = async (dto: LoginUserDto) => {
+  const res = await instance.post("/auth/login", dto);
   const { accessToken, user } = res.data;
 
   await setAccessToken(accessToken);
   return user;
 };
 
-export const register = async (email: string, password: string) => {
-  const res = await instance.post("/auth/register", { email, password });
+export const register = async (dto: RegisterUserDto) => {
+  const res = await instance.post("/auth/register", dto);
   const { accessToken, user } = res.data;
 
   await setAccessToken(accessToken);
