@@ -24,14 +24,14 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => <House size={28} color={color} />,
+          tabBarIcon: () => <House size={28} />,
         }}
       />
       <Tabs.Screen
         name="users-list/index"
         options={{
           title: "Список пользователей",
-          tabBarIcon: ({ color }) => <UsersRound size={28} color={color} />,
+          tabBarIcon: () => <UsersRound size={28} />,
         }}
       />
     </Tabs>
