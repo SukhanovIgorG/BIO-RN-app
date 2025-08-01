@@ -4,36 +4,39 @@ import { Platform } from "react-native";
 
 import { House, UsersRound } from "lucide-react-native";
 
-import { LogoutButton } from "@/components/Buttons/LogoutButton";
+import { LogoutButton } from "@/components";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function TabLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerRight: () => <LogoutButton style={{ marginRight: 10 }} />,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Главная",
-          tabBarIcon: ({ color }) => <House size={28} color={color} />,
+    <ProtectedRoute>
+      <Tabs
+        screenOptions={{
+          headerRight: () => <LogoutButton style={{ marginRight: 10 }} />,
+          tabBarStyle: Platform.select({
+            ios: {
+              // Use a transparent background on iOS to show the blur effect
+              position: "absolute",
+            },
+            default: {},
+          }),
         }}
-      />
-      <Tabs.Screen
-        name="users-list/index"
-        options={{
-          title: "Список пользователей",
-          tabBarIcon: ({ color }) => <UsersRound size={28} color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Главная",
+            tabBarIcon: ({ color }) => <House size={28} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="users-list/index"
+          options={{
+            title: "Список пользователей",
+            tabBarIcon: ({ color }) => <UsersRound size={28} color={color} />,
+          }}
+        />
+      </Tabs>
+    </ProtectedRoute>
   );
 }

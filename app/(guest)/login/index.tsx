@@ -1,3 +1,4 @@
+import { Routes } from "@/constants/routes";
 import { Colors, Gaps, Paddings, Radius } from "@/constants/tokens";
 import { useLogin } from "@/hooks/useLogin";
 import { DefaultLayout } from "@/layouts";
@@ -38,7 +39,7 @@ export default function LoginScreen() {
           <Button
             title="Нет аккаунта"
             type={"link"}
-            onPress={() => router.replace("/(guest)/registration")}
+            onPress={() => router.replace(Routes.Registration)}
           />
         </View>
       </View>
