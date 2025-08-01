@@ -1,58 +1,107 @@
 import { Routes } from "@/constants/routes";
 import { Colors, Gaps, Paddings, Radius } from "@/constants/tokens";
+import { useForm } from "@/hooks";
 import { useLogin } from "@/hooks/useLogin";
 import { DefaultLayout } from "@/layouts";
 import { Button, Typography } from "@/uikit";
 import { Input } from "@/uikit/Input";
 import { router } from "expo-router";
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
+
+const validators = {
+  email: [
+    (str: string) => (str.length < 3 ? "Минимум 3 символа" : null),
+    (str: string) => (!str.includes("@") ? "Некорректный email" : null),
+  ],
+  password: [(str: string) => (str.length < 6 ? "Минимум  6 символов" : null)],
+};
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    errors,
+    values: { email, password },
+    setField,
+    handleSubmit,
+    isValid,
+  } = useForm({
+    initialValues,
+    validators,
+  });
+
   const { mutate: login } = useLogin();
 
-  const handleSubmit = () => {
-    login({ email, password });
+  const onSubmit = (values: typeof initialValues) => {
+    login(values);
   };
 
   return (
     <DefaultLayout>
-      <View style={styles.page}>
-        <Typography variant="title">Вход</Typography>
-        <View style={styles.card}>
-          <Input
-            label="Email"
-            value={email}
-            onChangeText={setEmail}
-            placeholder="Email"
-          />
-          <Input
-            label="Пароль"
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Пароль"
-            isPassword
-          />
-          <Button title="Войти" type="primary" onPress={handleSubmit} />
-          <Button
-            title="Нет аккаунта"
-            type={"link"}
-            onPress={() => router.replace(Routes.Registration)}
-          />
-        </View>
-      </View>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={80}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView
+            contentContainerStyle={styles.page}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.page}>
+              <Typography variant="title">Вход</Typography>
+              <View style={styles.card}>
+                <Input
+                  label="Email"
+                  value={email}
+                  onChangeText={(e) => setField("email", e)}
+                  placeholder="Email"
+                  errorMessage={errors.email}
+                />
+                <Input
+                  label="Пароль"
+                  value={password}
+                  onChangeText={(e) => setField("password", e)}
+                  placeholder="Пароль"
+                  isPassword
+                  errorMessage={errors.password}
+                />
+                <Button
+                  title="Войти"
+                  type="primary"
+                  onPress={handleSubmit(onSubmit)}
+                  disabled={!isValid}
+                />
+                <Button
+                  title="Нет аккаунта"
+                  type={"link"}
+                  onPress={() => router.replace(Routes.Registration)}
+                />
+              </View>
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </DefaultLayout>
   );
 }
 
 const styles = StyleSheet.create({
   page: {
-    height: "100%",
-    flexDirection: "column",
-    gap: Gaps.g16,
+    flexGrow: 1,
     justifyContent: "center",
+    gap: Gaps.g16,
   },
   card: {
     flexDirection: "column",

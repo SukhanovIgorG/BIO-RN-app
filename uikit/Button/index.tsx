@@ -49,7 +49,12 @@ export const Button = ({
     <TouchableOpacity
       disabled={disabled}
       onPress={onPress}
-      style={[styles.button, type && variants[type], style]}
+      style={[
+        styles.button,
+        type && variants[type],
+        style,
+        disabled && { opacity: 0.6 },
+      ]}
       {...restProps}
     >
       {icon}
