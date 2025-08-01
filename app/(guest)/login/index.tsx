@@ -1,4 +1,5 @@
 import { Colors, Gaps, Paddings, Radius } from "@/constants/tokens";
+import { useLogin } from "@/hooks/useLogin";
 import { DefaultLayout } from "@/layouts";
 import { Button, Typography } from "@/uikit";
 import { Input } from "@/uikit/Input";
@@ -9,9 +10,11 @@ import { StyleSheet, View } from "react-native";
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const { mutate: login } = useLogin();
+  const { mutate: login } = useLogin();
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    login({ email, password });
+  };
 
   return (
     <DefaultLayout>

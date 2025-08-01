@@ -2,7 +2,7 @@ import { instance } from "./api.service";
 import { removeAccessToken, setAccessToken } from "./token.service";
 
 export const login = async (email: string, password: string) => {
-  const res = await instance.post("/api/auth/login", { email, password });
+  const res = await instance.post("/auth/login", { email, password });
   const { accessToken, user } = res.data;
 
   await setAccessToken(accessToken);
@@ -10,7 +10,7 @@ export const login = async (email: string, password: string) => {
 };
 
 export const register = async (email: string, password: string) => {
-  const res = await instance.post("/api/auth/register", { email, password });
+  const res = await instance.post("/auth/register", { email, password });
   const { accessToken, user } = res.data;
 
   await setAccessToken(accessToken);
@@ -19,7 +19,7 @@ export const register = async (email: string, password: string) => {
 
 export const refreshToken = async () => {
   try {
-    const res = await instance.post("/api/auth/refresh"); // cookie отправится автоматически
+    const res = await instance.post("/auth/refresh"); // cookie отправится автоматически
     const { accessToken } = res.data;
 
     await setAccessToken(accessToken);

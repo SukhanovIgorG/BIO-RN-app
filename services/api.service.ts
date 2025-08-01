@@ -7,6 +7,7 @@ console.log("BASE_URL :>> ", BASE_URL);
 
 export const instance = axios.create({
   baseURL: BASE_URL,
+  // baseURL: "http://192.168.31.60:3000/api",
   withCredentials: true,
 });
 
