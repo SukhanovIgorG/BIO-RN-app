@@ -3,21 +3,35 @@ import { DefaultLayout } from "@/layouts";
 import { Button, Typography } from "@/uikit";
 import { Input } from "@/uikit/Input";
 import { router } from "expo-router";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-export default function loginScreen() {
+export default function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const { mutate: login } = useLogin();
+
+  const handleSubmit = () => {};
+
   return (
     <DefaultLayout>
       <View style={styles.page}>
         <Typography variant="title">Вход</Typography>
         <View style={styles.card}>
-          <Input />
-          <Input isPassword />
-          <Button
-            title="Войти"
-            type="primary"
-            onPress={() => router.replace("/(user)")}
+          <Input
+            label="Email"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Email"
           />
+          <Input
+            label="Пароль"
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Пароль"
+            isPassword
+          />
+          <Button title="Войти" type="primary" onPress={handleSubmit} />
           <Button
             title="Нет аккаунта"
             type={"link"}

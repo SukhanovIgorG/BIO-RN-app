@@ -7,6 +7,7 @@ export const Colors = {
   icon: "#687076",
   tabIconDefault: "#687076",
   tabIconSelected: tintColorLight,
+  error: "#FF0000",
 };
 
 export const Gaps = {

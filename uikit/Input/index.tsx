@@ -9,16 +9,25 @@ import {
   View,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Typography } from "../Typography";
 
 export type InputProps = {
+  label?: string;
   isPassword?: boolean;
+  errorMessage?: string;
 } & TextInputProps;
 
-export const Input = ({ isPassword, ...props }: InputProps) => {
+export const Input = ({
+  isPassword,
+  label,
+  errorMessage,
+  ...props
+}: InputProps) => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   return (
     <View>
+      {label && <Typography variant="body">{label}</Typography>}
       <TextInput
         style={styles.input}
         secureTextEntry={isPassword && !isPasswordVisible}
@@ -32,6 +41,7 @@ export const Input = ({ isPassword, ...props }: InputProps) => {
           {isPasswordVisible ? <Eye /> : <EyeClosed />}
         </Pressable>
       )}
+      {errorMessage && <Typography variant="error">{errorMessage}</Typography>}
     </View>
   );
 };
@@ -51,7 +61,7 @@ const styles = StyleSheet.create({
     width: 48,
     position: "absolute",
     right: 8,
-    top: 0,
+    top: 10,
     height: "100%",
   },
 });
