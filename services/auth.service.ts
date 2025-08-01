@@ -20,7 +20,7 @@ export const register = async (dto: RegisterUserDto) => {
 
 export const refreshToken = async () => {
   try {
-    const res = await instance.post("/auth/refresh"); // cookie отправится автоматически
+    const res = await instance.post("/auth/refresh");
     const { accessToken } = res.data;
 
     await setAccessToken(accessToken);
@@ -33,6 +33,4 @@ export const refreshToken = async () => {
 
 export const logout = async () => {
   await removeAccessToken();
-  // Навигация или сброс состояния
-  console.log("User logged out");
 };

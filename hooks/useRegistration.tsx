@@ -3,6 +3,7 @@ import { useAuth } from "@/context/auth.context";
 import { register } from "@/services/auth.service";
 import { RegisterUserDto, User } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { router } from "expo-router";
 import { Alert } from "react-native";
 
@@ -22,8 +23,10 @@ export const useRegistration = () => {
       router.replace(Routes.Home);
     },
     onError: (error) => {
-      Alert.alert("Registration failed", error.message);
-      console.log("Registration failed", error);
+      if (error instanceof AxiosError) {
+        Alert.alert("Пользователь с таким логином уже существует");
+      }
+      Alert.alert("Произошла непредвиденная ошибка");
     },
   });
 };
