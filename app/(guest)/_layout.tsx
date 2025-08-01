@@ -12,13 +12,13 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="login"
+        name="login/index"
         options={{
           title: "Вход",
         }}
       />
       <Tabs.Screen
-        name="registration"
+        name="registration/index"
         options={{
           title: "Регистрация",
         }}
