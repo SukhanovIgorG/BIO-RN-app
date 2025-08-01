@@ -13,7 +13,11 @@ export default function loginScreen() {
         <View style={styles.card}>
           <Input />
           <Input isPassword />
-          <Button title="Войти" type="primary" />
+          <Button
+            title="Войти"
+            type="primary"
+            onPress={() => router.replace("/(user)")}
+          />
           <Button
             title="Нет аккаунта"
             type={"link"}

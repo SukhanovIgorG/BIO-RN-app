@@ -14,7 +14,11 @@ export default function RegistrationScreen() {
           <Input />
           <Input isPassword />
           <Input isPassword />
-          <Button title="Зарегистрироваться" type="primary" />
+          <Button
+            title="Зарегистрироваться"
+            type="primary"
+            onPress={() => router.replace("/(user)")}
+          />
           <Button
             title="Уже есть аккаунт"
             type={"link"}
