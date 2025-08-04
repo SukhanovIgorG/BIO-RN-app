@@ -41,7 +41,7 @@ export const Input = ({
           {isPasswordVisible ? <Eye /> : <EyeClosed />}
         </Pressable>
       )}
-      {errorMessage && <Typography variant="error">{errorMessage}</Typography>}
+      <Typography variant="error">{errorMessage}</Typography>
     </View>
   );
 };
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: 48,
     position: "absolute",
     right: 8,
-    top: 10,
+    top: 0,
     height: "100%",
   },
 });

@@ -2,6 +2,7 @@ import { Routes } from "@/constants/routes";
 import { useAuth } from "@/context/auth.context";
 import { login } from "@/services/auth.service";
 import { LoginUserDto, User } from "@/types";
+import { translateError } from "@/utils/translateError";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { router } from "expo-router";
@@ -23,9 +24,8 @@ export const useLogin = () => {
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
-        Alert.alert("Не верный логин или пароль");
+        Alert.alert(translateError(error));
       }
-      Alert.alert("Произошла непредвиденная ошибка");
     },
   });
 };

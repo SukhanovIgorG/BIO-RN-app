@@ -2,8 +2,8 @@ import { Routes } from "@/constants/routes";
 import { useAuth } from "@/context/auth.context";
 import { register } from "@/services/auth.service";
 import { RegisterUserDto, User } from "@/types";
+import { translateError } from "@/utils/translateError";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import { router } from "expo-router";
 import { Alert } from "react-native";
 
@@ -23,10 +23,7 @@ export const useRegistration = () => {
       router.replace(Routes.Home);
     },
     onError: (error) => {
-      if (error instanceof AxiosError) {
-        Alert.alert("Пользователь с таким логином уже существует");
-      }
-      Alert.alert("Произошла непредвиденная ошибка");
+      Alert.alert(translateError(error));
     },
   });
 };

@@ -7,8 +7,6 @@ export default function HomeScreen() {
   const queryClient = useQueryClient();
   const user = queryClient.getQueryData<User>(["user"]);
 
-  console.log("user :>> ", user);
-
   return (
     <DefaultLayout>
       <Typography>Привет {user?.username}! 👋</Typography>

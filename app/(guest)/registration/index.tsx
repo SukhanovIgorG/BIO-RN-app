@@ -5,6 +5,7 @@ import { useRegistration } from "@/hooks/useRegistration";
 import { DefaultLayout } from "@/layouts";
 import { Button, Typography } from "@/uikit";
 import { Input } from "@/uikit/Input";
+import { isEmailValid } from "@/utils/validation";
 import { router } from "expo-router";
 import {
   Keyboard,
@@ -27,7 +28,7 @@ const validators = {
   username: [(str: string) => (str.length < 3 ? "Минимум 3 символа" : null)],
   email: [
     (str: string) => (str.length < 3 ? "Минимум 3 символа" : null),
-    (str: string) => (!str.includes("@") ? "Некорректный email" : null),
+    (str: string) => (!isEmailValid(str) ? "Некорректный email" : null),
   ],
   password: [(str: string) => (str.length < 6 ? "Минимум  6 символов" : null)],
   repeatPassword: [
